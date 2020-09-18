@@ -6,15 +6,15 @@
 
 ## Task
 
-![Progresss Bar](https://progress-bar.dev/100/)  Add Student       
-![Progresss Bar](https://progress-bar.dev/75/)  Update Student    
-![Progresss Bar](https://progress-bar.dev/100/)  Remove Student    
-![Progresss Bar](https://progress-bar.dev/0/)  Add Subject
-![Progresss Bar](https://progress-bar.dev/0/)  Remove Subject 
-![Progresss Bar](https://progress-bar.dev/0/)  Update Subject 
-![Progresss Bar](https://progress-bar.dev/0/)  Add Grade
-![Progresss Bar](https://progress-bar.dev/0/)  Remove Grade 
-![Progresss Bar](https://progress-bar.dev/0/)  Update Grade 
+![Progresss Bar](https://progress-bar.dev/100/)  Add Student<br/>       
+![Progresss Bar](https://progress-bar.dev/75/)  Update Student<br/>    
+![Progresss Bar](https://progress-bar.dev/100/)  Remove Student<br/>  
+![Progresss Bar](https://progress-bar.dev/0/)  Add Subject<br/>
+![Progresss Bar](https://progress-bar.dev/0/)  Remove Subject<br/> 
+![Progresss Bar](https://progress-bar.dev/0/)  Update Subject<br/> 
+![Progresss Bar](https://progress-bar.dev/0/)  Add Grade<br/>
+![Progresss Bar](https://progress-bar.dev/0/)  Remove Grade<br/> 
+![Progresss Bar](https://progress-bar.dev/0/)  Update Grade <br/>
 
 ## Todo
 
