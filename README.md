@@ -6,9 +6,9 @@
 
 ## Task
 
-- [x] Add Student ![Progresss Bar](https://progress-bar.dev/100/)
-- [ ] Update Student 
-- [x] Remove Student
+- [x] Add Student       ![Progresss Bar](https://progress-bar.dev/100/)
+- [ ] Update Student    ![Progresss Bar](https://progress-bar.dev/75/)
+- [x] Remove Student    ![Progresss Bar](https://progress-bar.dev/100/)
 - [ ] Add Subject
 - [ ] Remove Subject 
 - [ ] Update Subject 
