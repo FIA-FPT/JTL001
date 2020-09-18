@@ -1,11 +1,11 @@
-#Java Lab First Assignment
+# Java Lab First Assignment
 
-##Objectivity
+## Objectivity
 
 - Fully understand ArrayList and it Manipulation
 - Get used to stuff
 
-##Task
+## Task
 
 - [x] Add Student
 - [] Update Student 
