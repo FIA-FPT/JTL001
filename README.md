@@ -16,3 +16,14 @@
 - ![Progresss Bar](https://progress-bar.dev/0/)  Remove Grade 
 - ![Progresss Bar](https://progress-bar.dev/0/)  Update Grade 
 
+## Todo
+
+- [x] Initliaze The Project
+- [x] Finishing up with the student class and student class list
+- [ ] Code The actual Menu for the app
+- [ ] Code Subject and Subject List
+- [ ] Code Grade and Grade List
+- [ ] Testing and make sure all the functionality works correctly
+- [ ] Turn in the assignments
+
+
