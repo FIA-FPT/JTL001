@@ -1,13 +1,12 @@
 # Java Lab First Assignment
 
-## Objectivity
+## Task Objective
 
-- Fully understand ArrayList and it Manipulation
-- Get used to stuff
+- Create a Student Management Program
 
 ## Task
 
-- [x] Add Student
+- [x] Add Student ![Progresss Bar](https://progress-bar.dev/100/)
 - [ ] Update Student 
 - [x] Remove Student
 - [ ] Add Subject
@@ -18,3 +17,4 @@
 - [ ] Update Grade 
 
 
+s
