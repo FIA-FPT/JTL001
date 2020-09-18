@@ -9,7 +9,7 @@
 
 - [x] Add Student
 - [ ] Update Student 
-- [ ] Remove Student
+- [x] Remove Student
 - [ ] Add Subject
 - [ ] Remove Subject 
 - [ ] Update Subject 
