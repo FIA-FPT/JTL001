@@ -12,7 +12,7 @@
 ![Progresss Bar](https://progress-bar.dev/100/)  Add Subject<br/>
 ![Progresss Bar](https://progress-bar.dev/100/)  Remove Subject<br/> 
 ![Progresss Bar](https://progress-bar.dev/100/)  Update Subject<br/> 
-![Progresss Bar](https://progress-bar.dev/0/)  Add Grade<br/>
+![Progresss Bar](https://progress-bar.dev/25/)  Add Grade<br/>
 ![Progresss Bar](https://progress-bar.dev/0/)  Remove Grade<br/> 
 ![Progresss Bar](https://progress-bar.dev/0/)  Update Grade <br/>
 

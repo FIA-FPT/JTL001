@@ -200,6 +200,7 @@ public class StudentList extends ArrayList<Student> {
                 Menu UDmenu = new Menu();
                 UDmenu.addItems("Update");
                 UDmenu.addItems("Delete");
+                UDmenu.addItems("Exit");
 
                 
                 UDmenu.printMenu();
