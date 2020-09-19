@@ -71,14 +71,22 @@ public class StudentList extends ArrayList<Student> {
                     }
                 }while(idIndex != -1 || isNull);
 
-                //Input First Name And Last Name
+                //Input First Name
 
 
                 do{
                     System.out.print("Input First name:  ");
                     firstName = EssentialUtils.capitalizeName(sc.nextLine());
                     isNull = EssentialUtils.isEmptyString(firstName);
+                    if(isNull){
+                        System.out.println("First name or Last name is empty! Try again!");
+                    }
 
+                }while(isNull);
+                
+                
+                //Input Last Name
+                do{
 
                     System.out.print("Input Last name:  ");
                     lastName =  EssentialUtils.capitalizeName(sc.nextLine());       

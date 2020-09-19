@@ -12,13 +12,13 @@ package j1.l.p0001.DTO;
 public class Grade {
     private String studentID;
     private String subjectID;
-    private Double lab,test,FE;
+    private Double lab,progressTest,FE;
 
     public Grade(String studentID, String subjectID, Double lab, Double test, Double FE) {
         this.studentID = studentID;
         this.subjectID = subjectID;
         this.lab = lab;
-        this.test = test;
+        this.progressTest = test;
         this.FE = FE;
     }
 
@@ -30,12 +30,12 @@ public class Grade {
         this.lab = lab;
     }
 
-    public Double getTest() {
-        return test;
+    public Double getProgressTest() {
+        return progressTest;
     }
 
-    public void setTest(Double test) {
-        this.test = test;
+    public void setProgressTest(Double progressTest) {
+        this.progressTest = progressTest;
     }
 
     public Double getFE() {
@@ -47,7 +47,7 @@ public class Grade {
     }
     
     private Double getAverage(){
-        return 0.3*lab + 0.2*test + 0.5*FE;
+        return 0.3*lab + 0.2*progressTest + 0.5*FE;
         
     }
 }

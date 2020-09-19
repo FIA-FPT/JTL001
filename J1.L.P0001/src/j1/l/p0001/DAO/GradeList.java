@@ -10,7 +10,9 @@ import j1.l.p0001.DAO.StudentList;
 import j1.l.p0001.DAO.SubjectList;
 import j1.l.p0001.Utils.EssentialUtils;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  *
@@ -28,6 +30,16 @@ public class GradeList extends ArrayList<Grade> {
     }
     
     
+    //Check if the record is already exist in the database, If yes return the index of it
+    public Integer getGradeIndex(String studentID, String subjectID){
+        for(int i = 0; i < size(); i++){
+            if(stdList.getIdIndex(studentID) != -1 && subList.getIdIndex(subjectID) != -1){
+                return i;
+            }
+        }
+        return -1;
+    }
+    
     
     //Add new grade to the list
     public void addGrade(){
@@ -37,15 +49,16 @@ public class GradeList extends ArrayList<Grade> {
        boolean isNull = true;
        boolean isCreditValid = false;
        boolean isContinue = true;
+       boolean isOverwriteConfirm = false ;
        
-       Integer isStudentNameExist = -1;
-       Integer isSubjectNameExist = -1;      
-       Integer isGradeExist = -1;
+       Integer studentPos = -1;
+       Integer ssubjectPos = -1;      
+       Integer gradeIndex = -1;
        
-       Double grade;
-       Double fE;
-       Double lab;
-       Double progressTest;
+       
+       Double FE = null;
+       Double lab = null;
+       Double progressTest = null;
        
        
         //Check if whether Student List Or Subject Is Empty, if one of it is Empty, Terminate the program      
@@ -69,20 +82,109 @@ public class GradeList extends ArrayList<Grade> {
                     System.out.println("IDs cannot be null!");
                     
                 } else{
-                    isStudentNameExist = stdList.getIdIndex(studentID);
-                    isSubjectNameExist = subList.getIdIndex(subjectID);
-                    if(isStudentNameExist == -1){
+                    studentPos = stdList.getIdIndex(studentID);
+                    ssubjectPos = subList.getIdIndex(subjectID);
+                    if(studentPos == -1){
                         System.out.println("Student ID Does Not Exist!");
                     }
-                    if(isSubjectNameExist == -1){
+                    if(ssubjectPos == -1){
                         System.out.println("Subject ID Does not Exist");
                     }
                 }
                 
                 
-            }while(isStudentNameExist != -1 || isSubjectNameExist != -1);
+            }while(studentPos != -1 || ssubjectPos != -1);
             
             
+            //Check if the user want to overwrite the score? if not continue the process
+            
+            if((gradeIndex = getGradeIndex(studentID,subjectID)) != -1 ){
+                
+                isOverwriteConfirm = EssentialUtils.chooseYN("Do you want to overwrite this grade");
+                
+                if(!isOverwriteConfirm){
+                    System.out.println("Operation Aborted!");
+                    break;
+                } else{
+                    
+                    
+                    //Loop until the input correct
+                    
+                    try{
+                        do{
+                            System.out.print("Input Progress Test Score");
+                            progressTest = sc.nextDouble();
+                            isCreditValid = EssentialUtils.isCreditValid(progressTest);
+                            if(!isCreditValid){
+                                System.out.println("Input invalid, try again!");
+                            }
+
+                        }while(!isCreditValid);
+
+                        do{
+                            System.out.print("Input Lab Score");
+                            lab = sc.nextDouble();
+                            isCreditValid = EssentialUtils.isCreditValid(lab);
+                            if(!isCreditValid){
+                                System.out.println("Input invalid, try again!");
+                            }
+                        }while(!isCreditValid);
+                            System.out.print("Input Final Exam Score");
+                            FE = sc.nextDouble();
+                            isCreditValid = EssentialUtils.isCreditValid(FE);
+                            if(!isCreditValid){
+                                System.out.println("Input invalid, try again!");
+                            }
+                        
+
+
+
+                    }catch(InputMismatchException e){
+                        System.out.println("Input mismatched!");
+                    }
+                    this.get(gradeIndex).setFE(FE);
+                    this.get(gradeIndex).setLab(lab);
+                    this.get(gradeIndex).setProgressTest(progressTest);
+                    
+                }
+                
+            } else{
+                 //Loop until the input correct
+                    
+                    try{
+                        do{
+                            System.out.print("Input Progress Test Score");
+                            progressTest = sc.nextDouble();
+                            isCreditValid = EssentialUtils.isCreditValid(progressTest);
+                            if(!isCreditValid){
+                                System.out.println("Input invalid, try again!");
+                            }
+
+                        }while(!isCreditValid);
+
+                        do{
+                            System.out.print("Input Lab Score");
+                            lab = sc.nextDouble();
+                            isCreditValid = EssentialUtils.isCreditValid(lab);
+                            if(!isCreditValid){
+                                System.out.println("Input invalid, try again!");
+                            }
+                        }while(!isCreditValid);
+                            System.out.print("Input Final Exam Score");
+                            FE = sc.nextDouble();
+                            isCreditValid = EssentialUtils.isCreditValid(FE);
+                            if(!isCreditValid){
+                                System.out.println("Input invalid, try again!");
+                            }
+                        
+
+
+
+                    }catch(InputMismatchException e){
+                        System.out.println("Input mismatched!");
+                    }
+                    this.add(new Grade(studentID,subjectID,lab,progressTest,FE));
+            }
             
 
         }while(isContinue = true);
