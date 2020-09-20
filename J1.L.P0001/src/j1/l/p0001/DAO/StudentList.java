@@ -79,7 +79,7 @@ public class StudentList extends ArrayList<Student> {
                     firstName = EssentialUtils.capitalizeName(sc.nextLine());
                     isNull = EssentialUtils.isEmptyString(firstName);
                     if(isNull){
-                        System.out.println("First name or Last name is empty! Try again!");
+                        System.out.println("First name is empty! Try again!");
                     }
 
                 }while(isNull);
@@ -93,7 +93,7 @@ public class StudentList extends ArrayList<Student> {
                     isNull = EssentialUtils.isEmptyString(lastName);
 
                     if(isNull){
-                        System.out.println("First name or Last name is empty! Try again!");
+                        System.out.println("Last name is empty! Try again!");
                     }
 
                 }while(isNull);

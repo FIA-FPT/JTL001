@@ -190,6 +190,74 @@ public class GradeList extends ArrayList<Grade> {
         }while(isContinue = true);
         
        }
-               
+       
+       
+       
     }
+    
+    public void printStudentReport(){
+        
+        boolean isNull;
+        
+        Integer idIndex;
+        
+        String studentID;
+        
+        do{
+                    System.out.print("Input Student ID:  ");
+                    studentID = sc.nextLine();
+                    idIndex = stdList.getIdIndex(studentID);
+                    isNull = EssentialUtils.isEmptyString(studentID);
+                    if(idIndex == -1){
+                        System.out.println("Code Did Not Exist, try again!");
+                    }
+                    if(isNull){
+                        System.out.println("ID cannot be null!");
+                    }
+        }while(idIndex == -1 || isNull);
+        
+        System.out.println(String.format("Student ID: %s", studentID));
+        System.out.println(String.format("Student Name: %s %s", stdList.get(idIndex).getFirstName(),stdList.get(idIndex).getLastName()));
+        
+        System.out.println("| ++ No ++ | +++++++Subject name ++++++++ | ++ Average mark ++ | ++ Status ++ | ");
+        
+        for(int i = 0; i < size();i++){
+            if(this.get(i).getStudentID().equals(studentID)){
+                System.out.format("|    %-2d  |     %-20s                    |     %-2.2f         |    %-8s      | ",i,subList.getIdIndex(get(i).getSubjectID()),get(i).getAverage(),get(i).checkPassed() ? "Passed" : "Not Passed");
+            }
+        }
+    }
+    
+    public void printSubjectReport(){
+        boolean isNull;
+        
+        Integer idIndex;
+        
+        String subjectID;
+        
+        do{
+                    System.out.print("Input Subject ID:  ");
+                    subjectID = sc.nextLine();
+                    idIndex = subList.getIdIndex(subjectID);
+                    isNull = EssentialUtils.isEmptyString(subjectID);
+                    if(idIndex == -1){
+                        System.out.println("Code Did Not Exist, try again!");
+                    }
+                    if(isNull){
+                        System.out.println("ID cannot be null!");
+                    }
+        }while(idIndex == -1 || isNull);
+        
+        System.out.println(String.format("Subject ID: %s", subjectID));
+        System.out.println(String.format("Subject Name: %s", subList.get(idIndex).getName()));
+        
+        System.out.println("| ++ No ++ | +++++++ Student Name ++++++++ | ++ Average mark ++ | ++ Status ++ | ");
+        
+        for(int i = 0; i < size();i++){
+            if(this.get(i).getStudentID().equals(subjectID)){
+                System.out.format("|    %-2d  |     %-20s -%20s                 |     %-2.2f         |    %-8s      | ",i,subList.getIdIndex(get(i).getSubjectID()),get(i).getAverage(),get(i).checkPassed() ? "Passed" : "Not Passed");
+            }
+        }
+    }
+    
 }

@@ -10,6 +10,7 @@ package j1.l.p0001.DTO;
  * @author ACER
  */
 public class Grade {
+    
     private String studentID;
     private String subjectID;
     private Double lab,progressTest,FE;
@@ -46,8 +47,30 @@ public class Grade {
         this.FE = FE;
     }
     
-    private Double getAverage(){
+    public Double getAverage(){
         return 0.3*lab + 0.2*progressTest + 0.5*FE;
         
+    }
+    public String getStudentID() {
+        return studentID;
+    }
+
+    public void setStudentID(String studentID) {
+        this.studentID = studentID;
+    }
+
+    public String getSubjectID() {
+        return subjectID;
+    }
+
+    public void setSubjectID(String subjectID) {
+        this.subjectID = subjectID;
+    }
+    
+    public boolean checkPassed(){
+        if(getAverage() < 4){
+            return false;
+        } 
+          return true;    
     }
 }
