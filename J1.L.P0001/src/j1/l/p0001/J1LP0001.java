@@ -5,7 +5,9 @@
  */
 package j1.l.p0001;
 
+import j1.l.p0001.DAO.GradeList;
 import j1.l.p0001.DAO.StudentList;
+import j1.l.p0001.DAO.SubjectList;
 import j1.l.p0001.Utils.Menu;
 
 /**
@@ -19,15 +21,54 @@ public class J1LP0001 {
      */
     
     public static void main(String[] args) {
-        Menu menu = new Menu();
+        Integer choice;
+        
+        
         StudentList stdList = new StudentList();
+        SubjectList subList = new SubjectList();
+        GradeList gradeList = new GradeList(stdList,subList);
         
-            stdList.addStudent();
-        while(true){
-            stdList.menuUpdateAndRemove();
-            stdList.print();
-        }
+        Menu mainMenu = new Menu("Student Managing Application");
         
+        mainMenu.add("Add New Student");
+        mainMenu.add("Update or Delete Student");
+        mainMenu.add("Add New Subject");
+        mainMenu.add("Update Or Delete Subject");
+        mainMenu.add("Add Grade");
+        mainMenu.add("Print Student Report");
+        mainMenu.add("Print Subject Report");
+        
+        
+        do{
+            mainMenu.printMenu();
+            choice = mainMenu.getChoice();
+            switch(choice){
+                case 1:
+                    stdList.addStudent();
+                    break;
+                case 2:
+                    stdList.menuUpdateAndRemove();
+                    break;
+                case 3:
+                    subList.addSubject();
+                   break;
+                case 4:
+                    subList.menuUpdateAndRemove();
+                    break;
+                case 5:
+                    gradeList.addGrade();
+                    break;
+                case 6:
+                    gradeList.printStudentReport();
+                    break;
+                case 7:
+                    gradeList.printSubjectReport();
+                    break;
+                default:
+                    System.out.println("Application Exited");
+            }
+            
+        }while(choice >= 1 && choice <= 7);
     }
     
 }

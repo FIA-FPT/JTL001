@@ -68,9 +68,6 @@ public class Grade {
     }
     
     public boolean checkPassed(){
-        if(getAverage() < 4){
-            return false;
-        } 
-          return true;    
+        return getAverage() > 4.0;   
     }
 }

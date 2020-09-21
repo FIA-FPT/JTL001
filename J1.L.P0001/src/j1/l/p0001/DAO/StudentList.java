@@ -103,7 +103,7 @@ public class StudentList extends ArrayList<Student> {
 
                 do{
 
-                    Menu genderMenu = new Menu();
+                    Menu genderMenu = new Menu("Gender Menu:");
 
 
                     genderMenu.addItems("Male");
@@ -205,7 +205,7 @@ public class StudentList extends ArrayList<Student> {
             System.out.println("Student Does Not Exist!");
         }else{
             //Menu for choosing update or delete
-                Menu UDmenu = new Menu();
+                Menu UDmenu = new Menu("Update And Delete Menu:");
                 UDmenu.addItems("Update");
                 UDmenu.addItems("Delete");
                 UDmenu.addItems("Exit");
@@ -260,13 +260,13 @@ public class StudentList extends ArrayList<Student> {
     private void updateStudent(Integer posID){
         
         
-        Menu updateMenu = new Menu();
+        Menu updateMenu = new Menu("Student Update Menu");
         updateMenu.add("Change First Name");
         updateMenu.add("Change Last Name");
         updateMenu.add("Change Date Of Birth");
         updateMenu.add("Change Email");
         updateMenu.add("Change Gender");
-        updateMenu.add("Delete");
+        updateMenu.add("Exit");
         
         
         
@@ -308,7 +308,7 @@ public class StudentList extends ArrayList<Student> {
                 isNull = EssentialUtils.isEmptyString(lastName);
                 if(!isNull){
                    changed = true;
-                   this.get(posID).setFirstName(lastName);
+                   this.get(posID).setLastName(lastName);
                 }
                 break;
                 
@@ -319,6 +319,9 @@ public class StudentList extends ArrayList<Student> {
                     DOB = sc.nextLine();
                     isNull = EssentialUtils.isEmptyString(DOB);
                     isDOBVerified = EssentialUtils.isDateValid(DOB);
+                    if(!isDOBVerified){
+                        System.out.println("Invalid Date");
+                    }
                     if(isNull){
                         break;
                     }
@@ -338,6 +341,9 @@ public class StudentList extends ArrayList<Student> {
                     email = sc.nextLine();
                     isNull = EssentialUtils.isEmptyString(email);
                     isEmailVerified = EssentialUtils.isEmailValid(email);
+                    if(!isEmailVerified){
+                        System.out.println("Invalid email");
+                    }
                     if(isNull){
                         break;
                     }
@@ -348,6 +354,43 @@ public class StudentList extends ArrayList<Student> {
                 this.get(posID).setEmail(email);
                 changed = true;
                 break;
+            case 5:
+                
+                Menu genderMenu = new Menu("Gender Menu:");
+                String gender;
+                
+
+
+                genderMenu.addItems("Male");
+                genderMenu.addItems("Female");
+                genderMenu.addItems("Others");
+
+                do{    
+                    genderMenu.printMenu();
+                    Integer genderChoice = genderMenu.getChoice();
+
+                    switch(genderChoice){
+                        case 1:
+                            gender = "Male";
+                            break;
+                        case 2:
+                            gender = "Female";
+                            break;
+                        case 3:
+                            gender = "Other";
+                            break;
+                        default:
+                            gender = null;                                          
+                        }
+
+
+                    isNull = EssentialUtils.isEmptyString(gender);
+                    if(isNull){
+                        System.out.println("Gender cannot be null! Try Again");
+                    }
+
+
+                }while(isNull);
                    
            
                 

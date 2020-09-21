@@ -15,6 +15,14 @@ import java.util.Scanner;
  */
 public class Menu extends ArrayList<String> {
     Scanner sc = new Scanner(System.in);
+    
+    String title;
+
+    public Menu(String title) {
+        this.title = title;
+    }
+    
+    
     //Add item to the menu List
     public void addItems(String item){
         add(item);
@@ -26,6 +34,7 @@ public class Menu extends ArrayList<String> {
             System.out.println("Menu is Empty!");
         } else{
             int i = 0;
+            System.out.println("\n"+title);
             for(String item : this){
                 System.out.println(String.format("[%d] %s",++i,item));
             }

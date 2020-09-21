@@ -36,7 +36,7 @@ public class SubjectList extends ArrayList<Subject> {
         String subjectID;
         String subjectName;
         
-        Double credit;
+        Double credit = null;
         
         Integer idIndex;
         
@@ -82,7 +82,7 @@ public class SubjectList extends ArrayList<Subject> {
                     credit = sc.nextDouble();
                     isCreditValid = EssentialUtils.isCreditValid(credit);
                     if(!isCreditValid){
-                        System.out.println("Credit cannot be null!");
+                        System.out.println("Credit must be in range 0 - 10");
                     }
                 }catch(InputMismatchException e){
                     System.out.println("Input mismatched!");     
@@ -90,7 +90,7 @@ public class SubjectList extends ArrayList<Subject> {
                 }
             }while(!isCreditValid);
             
-            
+            this.add(new Subject(subjectID,subjectName,credit));
             //Ask user whether to continue adding subject or not
             
             isContinue = EssentialUtils.chooseYN("Do you want to continue? (Y/N):  ");
@@ -123,7 +123,7 @@ public class SubjectList extends ArrayList<Subject> {
             System.out.println("Subject Code Does Not Exist!");
         }else{
             //Menu for choosing update or delete
-                Menu UDmenu = new Menu();
+                Menu UDmenu = new Menu("Subject Update and Delete");
                 UDmenu.addItems("Update");
                 UDmenu.addItems("Delete");
                 UDmenu.addItems("Exit");
@@ -177,7 +177,7 @@ public class SubjectList extends ArrayList<Subject> {
     }
     private void updateSubject(Integer posID){
         //Initalize the Menu
-        Menu updateMenu = new Menu();
+        Menu updateMenu = new Menu("Subject Update Menu:");
         updateMenu.addItems("Update Subject Name");
         updateMenu.addItems("Update Credit Score");
         
@@ -190,8 +190,10 @@ public class SubjectList extends ArrayList<Subject> {
         
         boolean isNull = true;
         boolean isCreditValid = false;
+        
         boolean changed = false;
         
+        updateMenu.printMenu();
         choice = updateMenu.getChoice();
         
         //Using case switch to make decision

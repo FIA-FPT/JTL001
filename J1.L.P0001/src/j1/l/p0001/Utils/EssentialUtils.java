@@ -83,7 +83,7 @@ public class EssentialUtils {
     
     //Utility for checking credit score. Must be positive number and not null
     public static boolean isCreditValid(Double credit){
-        if(credit <= 0 || credit > 10){
+        if(credit < 0 || credit > 10){
             return false;
         }
         return true;
