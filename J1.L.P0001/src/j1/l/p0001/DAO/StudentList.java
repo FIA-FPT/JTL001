@@ -266,6 +266,7 @@ public class StudentList extends ArrayList<Student> {
         updateMenu.add("Change Date Of Birth");
         updateMenu.add("Change Email");
         updateMenu.add("Change Gender");
+        updateMenu.add("Change Phone Number");
         updateMenu.add("Exit");
         
         
@@ -282,6 +283,7 @@ public class StudentList extends ArrayList<Student> {
         String firstName;
         String lastName;
         String email;
+        String phoneNumber;
         
         updateMenu.printMenu();
         choice = updateMenu.getChoice();
@@ -365,7 +367,7 @@ public class StudentList extends ArrayList<Student> {
                 genderMenu.addItems("Female");
                 genderMenu.addItems("Others");
 
-                do{    
+                    
                     genderMenu.printMenu();
                     Integer genderChoice = genderMenu.getChoice();
 
@@ -385,12 +387,33 @@ public class StudentList extends ArrayList<Student> {
 
 
                     isNull = EssentialUtils.isEmptyString(gender);
-                    if(isNull){
-                        System.out.println("Gender cannot be null! Try Again");
+                    if(isNull){                      
+                        break;
                     }
 
 
-                }while(isNull);
+                
+                this.get(posID).setGender(gender);
+                changed = true;
+                break;
+            case 6:
+                do{
+                    System.out.print("Input phone number here:  ");
+                    phoneNumber = sc.nextLine();
+                    if(EssentialUtils.isEmptyString(phoneNumber)) break;
+                    isPhoneNumberVerified = EssentialUtils.isPhoneNumberValid(phoneNumber);
+
+                    if(!isPhoneNumberVerified){
+                        System.out.println("Phone Number invalid! Try again!");
+                    }
+                }while(!isPhoneNumberVerified);
+                if(!isNull){
+                    this.get(posID).setPhoneNumber(phoneNumber);
+                    changed = true;
+                    break;
+                } else{
+                    break;
+                }
                    
            
                 

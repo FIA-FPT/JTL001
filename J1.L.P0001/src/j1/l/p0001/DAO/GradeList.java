@@ -224,11 +224,11 @@ public class GradeList extends ArrayList<Grade> {
         
         for(int i = 0; i < size();i++){
             if(this.get(i).getStudentID().equals(studentID)){
-                System.out.format("| %-3s | %-40s | %-14.2f | %-10s |",
+                System.out.println(String.format("| %-3s | %-40s | %-14.2f | %-10s |",
                         (i+1),
                         subList.get(subList.getIdIndex(get(i).getSubjectID())).getName(),                       
                         get(i).getAverage(),
-                        get(i).checkPassed() ? "Passed" : "Not Passed");
+                        get(i).checkPassed() ? "Passed" : "Not Passed"));
             }
         }
     }
