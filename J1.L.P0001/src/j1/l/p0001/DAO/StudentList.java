@@ -188,6 +188,7 @@ public class StudentList extends ArrayList<Student> {
     
     public void menuUpdateAndRemove(){
         
+        boolean isContinue = false;
         
        //Check if the list is empty 
        if(this.isEmpty()){
@@ -196,7 +197,9 @@ public class StudentList extends ArrayList<Student> {
        else{
            
         String id;
+        
         Integer checkPos = -1;
+        Integer choice = 1;
         
         System.out.println("Input your ID here");
         id = sc.nextLine();
@@ -205,25 +208,25 @@ public class StudentList extends ArrayList<Student> {
             System.out.println("Student Does Not Exist!");
         }else{
             //Menu for choosing update or delete
-                Menu UDmenu = new Menu("Update And Delete Menu:");
-                UDmenu.addItems("Update");
-                UDmenu.addItems("Delete");
-                UDmenu.addItems("Exit");
+                do{
+                    Menu UDmenu = new Menu("Update And Delete Menu:");
+                    UDmenu.addItems("Update");
+                    UDmenu.addItems("Delete");
 
-                
-                UDmenu.printMenu();
-                Integer choice = UDmenu.getChoice();
-                switch(choice){
-                    case 1:
-                        updateStudent(checkPos);
-                        break;
-                    case 2:
-                        deleteStudent(checkPos);
-                        break;
-                    default:
-                        System.out.println("Update and Delete Menu Exited!");
 
-                }
+                    UDmenu.printMenu();
+                    choice = UDmenu.getChoice();
+                    switch(choice){
+                        case 1:
+                            updateStudent(checkPos);  
+                            break;
+                        case 2:
+                            deleteStudent(checkPos);
+                            return;                                               
+
+                    }
+                }while(choice > 0 && choice < 3);
+                System.out.println("Update and Delete Menu Exited!");
             }
         } 
    }
@@ -267,17 +270,16 @@ public class StudentList extends ArrayList<Student> {
         updateMenu.add("Change Email");
         updateMenu.add("Change Gender");
         updateMenu.add("Change Phone Number");
-        updateMenu.add("Exit");
         
         
         
         Integer choice = 0;
+        Integer changeOccured = 0;
         
         boolean isNull = true;
         boolean isEmailVerified = false;
         boolean isPhoneNumberVerified = false;
         boolean isDOBVerified = true;
-        boolean changed = false;
         
         String DOB;
         String firstName;
@@ -285,142 +287,161 @@ public class StudentList extends ArrayList<Student> {
         String email;
         String phoneNumber;
         
-        updateMenu.printMenu();
-        choice = updateMenu.getChoice();
         
-        switch(choice){
-            
-            //Update First Name
-            case 1:
-                
-                
-                System.out.print("Input First Name:  ");
-                firstName = sc.nextLine();
-                isNull = EssentialUtils.isEmptyString(firstName);
-                if(!isNull){
-                   changed = true;
-                   this.get(posID).setFirstName(firstName);
-                }
-                break;
-                
-            //Update Last Name
-            case 2:
-                System.out.print("Input Last Name:  ");
-                lastName = sc.nextLine();
-                isNull = EssentialUtils.isEmptyString(lastName);
-                if(!isNull){
-                   changed = true;
-                   this.get(posID).setLastName(lastName);
-                }
-                break;
-                
-            //Update Date Of Birth
-            case 3:
-                do{
-                    System.out.print("Input Date Of Birth:  ");
-                    DOB = sc.nextLine();
-                    isNull = EssentialUtils.isEmptyString(DOB);
-                    isDOBVerified = EssentialUtils.isDateValid(DOB);
-                    if(!isDOBVerified){
-                        System.out.println("Invalid Date");
+        do{
+            updateMenu.printMenu();
+            choice = updateMenu.getChoice();
+            switch(choice){
+
+                //Update First Name
+                case 1:
+
+
+                    System.out.print("Input First Name:  ");
+                    firstName = sc.nextLine();
+                    isNull = EssentialUtils.isEmptyString(firstName);
+                    if(!isNull){
+                       changeOccured++;
+                       System.out.println("Update Succesful");
+                       this.get(posID).setFirstName(firstName);
+                    }else{
+                        System.out.println("Update Aborted!");
                     }
+                    break;
+
+                //Update Last Name
+                case 2:
+                    System.out.print("Input Last Name:  ");
+                    lastName = sc.nextLine();
+                    isNull = EssentialUtils.isEmptyString(lastName);
+                    if(!isNull){
+                       changeOccured++;
+                       System.out.println("Update Succesful");
+                       this.get(posID).setLastName(lastName);
+                    }else{
+                        System.out.println("Update Aborted!");
+                    }
+                    break;
+
+                //Update Date Of Birth
+                case 3:
+                    do{
+                        System.out.print("Input Date Of Birth:  ");
+                        DOB = sc.nextLine();
+                        isNull = EssentialUtils.isEmptyString(DOB);
+                        isDOBVerified = EssentialUtils.isDateValid(DOB);
+                        if(!isDOBVerified){
+                            System.out.println("Invalid Date");
+                        }
+                        if(isNull){
+                            break;
+                        }
+                    }while(!isDOBVerified);
                     if(isNull){
+                        System.out.println("Update Aborted!");
                         break;
                     }
-                }while(!isDOBVerified);
-                if(isNull){
+                    this.get(posID).setDOB(DOB);
+                    changeOccured++;
+                    System.out.println("Update Succesful");
                     break;
-                }
-                this.get(posID).setDOB(DOB);
-                changed = true;
-                break;
-                
-            //Update Email
-            case 4:
-                do{
-                    
-                    System.out.print("Input Email:  ");
-                    email = sc.nextLine();
-                    isNull = EssentialUtils.isEmptyString(email);
-                    isEmailVerified = EssentialUtils.isEmailValid(email);
-                    if(!isEmailVerified){
-                        System.out.println("Invalid email");
-                    }
+
+                //Update Email
+                case 4:
+                    do{
+
+                        System.out.print("Input Email:  ");
+                        email = sc.nextLine();
+                        isNull = EssentialUtils.isEmptyString(email);
+                        isEmailVerified = EssentialUtils.isEmailValid(email);
+                        if(!isEmailVerified){
+                            System.out.println("Invalid email");
+                        }
+                        if(isNull){
+                            break;
+                        }
+                    }while(!isEmailVerified);
                     if(isNull){
+                        System.out.println("Update Aborted!");
                         break;
                     }
-                }while(!isEmailVerified);
-                if(isNull){
+                    this.get(posID).setEmail(email);
+                    changeOccured++;
+                    System.out.println("Update Succesful");
                     break;
-                }
-                this.get(posID).setEmail(email);
-                changed = true;
-                break;
-            case 5:
-                
-                Menu genderMenu = new Menu("Gender Menu:");
-                String gender;
-                
+                case 5:
+
+                    Menu genderMenu = new Menu("Gender Menu:");
+                    String gender;
 
 
-                genderMenu.addItems("Male");
-                genderMenu.addItems("Female");
-                genderMenu.addItems("Others");
 
-                    
-                    genderMenu.printMenu();
-                    Integer genderChoice = genderMenu.getChoice();
+                    genderMenu.addItems("Male");
+                    genderMenu.addItems("Female");
+                    genderMenu.addItems("Others");
 
-                    switch(genderChoice){
-                        case 1:
-                            gender = "Male";
+
+                        genderMenu.printMenu();
+                        Integer genderChoice = genderMenu.getChoice();
+
+                        switch(genderChoice){
+                            case 1:
+                                gender = "Male";
+                                break;
+                            case 2:
+                                gender = "Female";
+                                break;
+                            case 3:
+                                gender = "Other";
+                                break;
+                            default:
+                                gender = null;                                          
+                            }
+
+
+                        isNull = EssentialUtils.isEmptyString(gender);
+                        if(isNull){   
+                            System.out.println("Update Aborted!");
                             break;
-                        case 2:
-                            gender = "Female";
-                            break;
-                        case 3:
-                            gender = "Other";
-                            break;
-                        default:
-                            gender = null;                                          
                         }
 
 
-                    isNull = EssentialUtils.isEmptyString(gender);
-                    if(isNull){                      
+
+                    this.get(posID).setGender(gender);
+                    changeOccured++;
+                    System.out.println("Update Succesful");
+                    break;
+                case 6:
+                    do{
+                        System.out.print("Input phone number here:  ");
+                        phoneNumber = sc.nextLine();
+                        if(EssentialUtils.isEmptyString(phoneNumber)){
+                            
+                            break;
+                        }                        
+                        isPhoneNumberVerified = EssentialUtils.isPhoneNumberValid(phoneNumber);
+
+                        if(!isPhoneNumberVerified){
+                            System.out.println("Phone Number invalid! Try again!");
+                        }
+                    }while(!isPhoneNumberVerified);
+                    if(!isNull){
+                        this.get(posID).setPhoneNumber(phoneNumber);
+                        changeOccured++;
+                        System.out.println("Update Succesful");
+                        break;
+                    } else{
+                        System.out.println("Update Aborted!");
                         break;
                     }
 
 
-                
-                this.get(posID).setGender(gender);
-                changed = true;
-                break;
-            case 6:
-                do{
-                    System.out.print("Input phone number here:  ");
-                    phoneNumber = sc.nextLine();
-                    if(EssentialUtils.isEmptyString(phoneNumber)) break;
-                    isPhoneNumberVerified = EssentialUtils.isPhoneNumberValid(phoneNumber);
 
-                    if(!isPhoneNumberVerified){
-                        System.out.println("Phone Number invalid! Try again!");
-                    }
-                }while(!isPhoneNumberVerified);
-                if(!isNull){
-                    this.get(posID).setPhoneNumber(phoneNumber);
-                    changed = true;
-                    break;
-                } else{
-                    break;
-                }
-                   
-           
-                
-                
-        }
-        if(changed){
-            System.out.println("Update successfully");
+
+            }
+        }while(choice > 0 && choice < 7);
+        if(changeOccured > 0){
+            System.out.println(changeOccured + " Changed Were Made!");
         } else{
             System.out.println("Nothing updated");
         }

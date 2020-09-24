@@ -82,7 +82,7 @@ public class SubjectList extends ArrayList<Subject> {
                     credit = sc.nextDouble();
                     isCreditValid = EssentialUtils.isCreditValid(credit);
                     if(!isCreditValid){
-                        System.out.println("Credit must be in range 0 - 10");
+                        System.out.println("Credit must be in range 0 - 30");
                     }
                 }catch(InputMismatchException e){
                     System.out.println("Input mismatched!");     
@@ -115,6 +115,7 @@ public class SubjectList extends ArrayList<Subject> {
            
         String id;
         Integer checkPos = -1;
+        Integer choice = 1;
         
         System.out.println("Input your ID here");
         id = sc.nextLine();
@@ -123,24 +124,25 @@ public class SubjectList extends ArrayList<Subject> {
             System.out.println("Subject Code Does Not Exist!");
         }else{
             //Menu for choosing update or delete
-                Menu UDmenu = new Menu("Subject Update and Delete");
-                UDmenu.addItems("Update");
-                UDmenu.addItems("Delete");
-                UDmenu.addItems("Exit");
+            while(choice > 0 && choice < 3){
+                    Menu UDmenu = new Menu("Subject Update and Delete");
+                    UDmenu.addItems("Update");
+                    UDmenu.addItems("Delete");
 
-                
-                UDmenu.printMenu();
-                Integer choice = UDmenu.getChoice();
-                switch(choice){
-                    case 1:
-                        updateSubject(checkPos);
-                        break;
-                    case 2:
-                        deleteSubject(checkPos);
-                        break;
-                    default:
-                        System.out.println("Update and Delete Menu Exited!");
 
+                    UDmenu.printMenu();
+                    choice = UDmenu.getChoice();
+                    switch(choice){
+                        case 1:
+                            updateSubject(checkPos);
+                            break;
+                        case 2:
+                            deleteSubject(checkPos);
+                            return;
+                        default:
+                            System.out.println("Update and Delete Menu Exited!");
+
+                    }
                 }
             }
         } 
@@ -181,60 +183,66 @@ public class SubjectList extends ArrayList<Subject> {
         updateMenu.addItems("Update Subject Name");
         updateMenu.addItems("Update Credit Score");
         
-        
         String subjectName;
                
         Double creditScore;
         
-        Integer choice;
+        Integer choice = 0;
+        Integer changeOccured  = 0;
         
         boolean isNull = true;
         boolean isCreditValid = false;
         
-        boolean changed = false;
         
-        updateMenu.printMenu();
-        choice = updateMenu.getChoice();
+        
         
         //Using case switch to make decision
-        switch(choice){
-            case 1:
-                System.out.println("Input new Subject Name to update");
-                subjectName = sc.nextLine();
-                isNull = EssentialUtils.isEmptyString(subjectName);
-                if(!isNull){
-                    this.get(posID).setName(subjectName);
-                    changed = true;
-                } else{
-                    changed = false;
-                }
-                break;
-            case 2:
-                do{
-                try{
-                    System.out.println("Input new Credit to update");
-                    creditScore = sc.nextDouble();
-                    if(creditScore == 0){
-                        changed = false;
-                        break;
-                    }else{
-                        isCreditValid = EssentialUtils.isCreditValid(creditScore);
-                        if(isCreditValid){
-                            
-                            this.get(posID).setCredit(creditScore);
-                            changed = true;
-                            
-                        }
+        
+        while(choice > 0 && choice < 3){
+            updateMenu.printMenu();
+            choice = updateMenu.getChoice();
+            switch(choice){
+                case 1:
+                    System.out.println("Input new Subject Name to update");
+                    subjectName = sc.nextLine();
+                    isNull = EssentialUtils.isEmptyString(subjectName);
+                    if(!isNull){
+                        this.get(posID).setName(subjectName);
+                        System.out.println("Update Successful");
+                        changeOccured++;
                     }
-                }catch(InputMismatchException e){
-                    System.out.println("Input mismatched!");
-                    
-                }
-                }while(!isCreditValid);
-            
+                    break;
+                case 2:
+                    do{
+                    try{
+                        System.out.println("Input new Credit to update");
+                        creditScore = sc.nextDouble();
+                        if(creditScore == 0){
+                            
+                            break;
+                        }else{
+                            isCreditValid = EssentialUtils.isCreditValid(creditScore);
+                            if(isCreditValid){
+
+                                this.get(posID).setCredit(creditScore);
+                                System.out.println("Update Successful");
+                                changeOccured++;
+
+                            } else{
+                                System.out.println("Must be in range 0 - 30");
+                            }
+                        }
+                    }catch(InputMismatchException e){
+                        System.out.println("Input mismatched!");
+
+                    }
+                    }while(!isCreditValid);
+                    break;
+
+            }
         }
-        if(changed){
-            System.out.println("Changed successfully");
+        if(changeOccured > 0){
+            System.out.println(changeOccured + " Changed Were Made");
         } else{
             System.out.println("Nothing Changed");
         }

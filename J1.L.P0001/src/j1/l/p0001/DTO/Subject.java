@@ -9,7 +9,7 @@ package j1.l.p0001.DTO;
  *
  * @author ACER
  */
-public class Subject {
+public class Subject implements Comparable<Subject> {
     String ID,name;
     Double credit;
     public boolean canDelete = true;
@@ -43,5 +43,11 @@ public class Subject {
     public void setCredit(Double credit) {
         this.credit = credit;
     }
+    
+    @Override
+    public int compareTo(Subject t) {
+        return this.getName().compareTo(t.getName());
+    }
+    
     
 }

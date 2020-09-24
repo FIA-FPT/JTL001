@@ -9,6 +9,8 @@ import com.sun.xml.internal.ws.util.StringUtils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -16,7 +18,7 @@ import java.util.Scanner;
  */
 public class EssentialUtils {
     private static final String PHONE_PATTERN = "^[0-9]{10,12}$";
-    private static final String EMAIL_PATTERN = "^[a-zA-Z0-9+_.-].+@[a-zA-Z0-9+_.-]+$";
+    private static final Pattern EMAIL_PATTERN = Pattern.compile("^\\w+[A-Z0-9._%+-]?+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",Pattern.CASE_INSENSITIVE);
     private static final String DATE_FORMAT = "dd/MM/yyyy";
     
     
@@ -29,7 +31,9 @@ public class EssentialUtils {
     
     //Validate email through RegExp
     public static boolean isEmailValid(String email){
-        return email.matches(EMAIL_PATTERN);
+        Matcher matcher = EMAIL_PATTERN.matcher(email);
+        boolean isValid = matcher.find();
+        return isValid;
     }
     
     //Validate Date through date
@@ -81,9 +85,16 @@ public class EssentialUtils {
         return choice;
     }
     
-    //Utility for checking credit score. Must be positive number and not null
+    //Utility for checking grade score. Must be positive number and not null
+    public static boolean isGradeValid(Double grade){
+        if(grade < 0 || grade > 10){
+            return false;
+        }       
+        return true;
+    }
+    
     public static boolean isCreditValid(Double credit){
-        if(credit < 0 || credit > 10){
+        if(credit < 0 || credit > 30){
             return false;
         }
         return true;

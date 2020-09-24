@@ -23,7 +23,7 @@
 - [x] Code The actual Menu for the app
 - [x] Code Subject and Subject List
 - [x] Code Grade and Grade List
-- [ ] Testing and make sure all the functionality works correctly
+- [x] Testing and make sure all the functionality works correctly
 - [ ] Turn in the assignments
 
 

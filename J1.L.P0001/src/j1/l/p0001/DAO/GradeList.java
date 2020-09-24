@@ -6,13 +6,12 @@
 package j1.l.p0001.DAO;
 
 import j1.l.p0001.DTO.Grade;
-import j1.l.p0001.DAO.StudentList;
-import j1.l.p0001.DAO.SubjectList;
 import j1.l.p0001.Utils.EssentialUtils;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.Set;
 
 /**
  *
@@ -47,7 +46,7 @@ public class GradeList extends ArrayList<Grade> {
        String subjectID;
         
        boolean isNull = true;
-       boolean isCreditValid = false;
+       boolean isGradeValid = false;
        boolean isContinue = true;
        boolean isOverwriteConfirm = false ;
       
@@ -114,25 +113,25 @@ public class GradeList extends ArrayList<Grade> {
                         do{
                             System.out.print("Input Progress Test Score: ");
                             progressTest = sc.nextDouble();
-                            isCreditValid = EssentialUtils.isCreditValid(progressTest);
-                            if(!isCreditValid){
+                            isGradeValid = EssentialUtils.isGradeValid(progressTest);
+                            if(!isGradeValid){
                                 System.out.println("Input invalid, try again!");
                             }
 
-                        }while(!isCreditValid);
+                        }while(!isGradeValid);
 
                         do{
                             System.out.print("Input Lab Score: ");
                             lab = sc.nextDouble();
-                            isCreditValid = EssentialUtils.isCreditValid(lab);
-                            if(!isCreditValid){
+                            isGradeValid = EssentialUtils.isGradeValid(lab);
+                            if(!isGradeValid){
                                 System.out.println("Input invalid, try again!");
                             }
-                        }while(!isCreditValid);
+                        }while(!isGradeValid);
                             System.out.print("Input Final Exam Score: ");
                             FE = sc.nextDouble();
-                            isCreditValid = EssentialUtils.isCreditValid(FE);
-                            if(!isCreditValid){
+                            isGradeValid = EssentialUtils.isGradeValid(FE);
+                            if(!isGradeValid){
                                 System.out.println("Input invalid, try again!");
                             }
                         
@@ -155,25 +154,25 @@ public class GradeList extends ArrayList<Grade> {
                         do{
                             System.out.print("Input Progress Test Score: ");
                             progressTest = sc.nextDouble();
-                            isCreditValid = EssentialUtils.isCreditValid(progressTest);
-                            if(!isCreditValid){
+                            isGradeValid = EssentialUtils.isGradeValid(progressTest);
+                            if(!isGradeValid){
                                 System.out.println("Input invalid, try again!");
                             }
 
-                        }while(!isCreditValid);
+                        }while(!isGradeValid);
 
                         do{
                             System.out.print("Input Lab Score: ");
                             lab = sc.nextDouble();
-                            isCreditValid = EssentialUtils.isCreditValid(lab);
-                            if(!isCreditValid){
+                            isGradeValid = EssentialUtils.isGradeValid(lab);
+                            if(!isGradeValid){
                                 System.out.println("Input invalid, try again!");
                             }
-                        }while(!isCreditValid);
+                        }while(!isGradeValid);
                             System.out.print("Input Final Exam Score: ");
                             FE = sc.nextDouble();
-                            isCreditValid = EssentialUtils.isCreditValid(FE);
-                            if(!isCreditValid){
+                            isGradeValid = EssentialUtils.isGradeValid(FE);
+                            if(!isGradeValid){
                                 System.out.println("Input invalid, try again!");
                             }
                         
@@ -217,18 +216,25 @@ public class GradeList extends ArrayList<Grade> {
                     }
         }while(idIndex == -1 || isNull);
         
+        Collections.sort(this, (Grade t, Grade t1) -> {
+            String subjectID1 = t.getSubjectID();
+            String subjectID2 = t1.getSubjectID();
+            return subList.get(subList.getIdIndex(subjectID1)).compareTo(subList.get(subList.getIdIndex(subjectID2)));
+        });
+        
         System.out.println(String.format("Student ID: %s", studentID));
         System.out.println(String.format("Student Name: %s %s", stdList.get(idIndex).getFirstName(),stdList.get(idIndex).getLastName()));
         
         System.out.println(String.format("| %-3s | %-40s | %-14s | %-10s |","No.","Subject Name","Average","Status"));
-        
+        Integer j = 1;
         for(int i = 0; i < size();i++){
             if(this.get(i).getStudentID().equals(studentID)){
                 System.out.println(String.format("| %-3s | %-40s | %-14.2f | %-10s |",
-                        (i+1),
+                        j,
                         subList.get(subList.getIdIndex(get(i).getSubjectID())).getName(),                       
                         get(i).getAverage(),
                         get(i).checkPassed() ? "Passed" : "Not Passed"));
+                j++;
             }
         }
     }
@@ -253,21 +259,25 @@ public class GradeList extends ArrayList<Grade> {
                     }
         }while(idIndex == -1 || isNull);
         
+        Collections.sort(this, (Grade t, Grade t1) -> {
+            String studentID1 = t.getStudentID();
+            String studentID2 = t1.getStudentID();
+            return stdList.get(stdList.getIdIndex(studentID1)).compareTo(stdList.get(stdList.getIdIndex(studentID2)));
+        });
         
-        
+       
+      
         System.out.println(String.format("Subject ID: %s", subjectID));
         System.out.println(String.format("Subject Name: %s", subList.get(idIndex).getName()));
         
-        System.out.println(String.format("| %-3s | %-40s | %-14s | %-10s |","No.","Student Name","Average","Status"));
+        System.out.println(String.format("| %-10s | %-40s | %-14s | %-10s |","Student ID","Student Name","Average","Status"));
         
         for(int i = 0; i < size();i++){
             if(this.get(i).getSubjectID().equals(subjectID)){
-                StringBuilder name = new StringBuilder();
-                name =  name.append(stdList.get(stdList.getIdIndex(get(i).getStudentID())).getFirstName()).
-                        append(" ").
-                        append(stdList.get(stdList.getIdIndex(get(i).getStudentID())).getLastName());
-                System.out.println(String.format("| %-3d | %-40s | %-14.2f | %-10s |"
-                        ,(i+1)                 
+                
+                String name = stdList.get(stdList.getIdIndex(this.get(i).getStudentID())).getName();
+                System.out.println(String.format("| %-10s | %-40s | %-14.2f | %-10s |"
+                        ,this.get(i).getStudentID()               
                         ,name                       
                         ,get(i).getAverage(),get(i).checkPassed() ? "Passed" : "Not Passed"));
             }

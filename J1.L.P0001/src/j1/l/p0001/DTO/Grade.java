@@ -5,6 +5,8 @@
  */
 package j1.l.p0001.DTO;
 
+import java.util.Comparator;
+
 /**
  *
  * @author ACER
@@ -68,6 +70,9 @@ public class Grade {
     }
     
     public boolean checkPassed(){
-        return getAverage() > 4.0;   
+        return getAverage() > 5.0;   
     }
+    
+   
+    
 }

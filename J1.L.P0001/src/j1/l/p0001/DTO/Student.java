@@ -9,7 +9,7 @@ package j1.l.p0001.DTO;
  *
  * @author ACER
  */
-public class Student {
+public class Student implements Comparable<Student> {
     String id,firstName,lastName,gender,DOB,email,phoneNumber;
     public boolean canDelete = true;
 
@@ -78,10 +78,18 @@ public class Student {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
+    
+    public String getName(){
+        return getFirstName() + " " + getLastName();
+    }
     @Override
     public String toString() {
         return "Student{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", DOB=" + DOB + ", email=" + email + ", phoneNumber=" + phoneNumber + ", canDelete=" + canDelete + '}';
+    }
+
+    @Override
+    public int compareTo(Student t) {
+       return this.getName().compareTo(t.getName());
     }
     
     
