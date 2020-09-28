@@ -31,7 +31,6 @@ public class StudentList extends ArrayList<Student> {
     public void addStudent(){
         Integer idIndex = -1;
         
-        
         boolean isNull = true;
         boolean continueChoice = true;
         boolean isDOBVerified = false;
@@ -54,7 +53,7 @@ public class StudentList extends ArrayList<Student> {
         //Loop until User Choice = N
             do{
 
-
+                sc = new Scanner(System.in);
                 //Input ID and check with the database
 
 
@@ -110,7 +109,7 @@ public class StudentList extends ArrayList<Student> {
                     genderMenu.addItems("Female");
                     genderMenu.addItems("Others");
 
-                    genderMenu.printMenu();
+                    genderMenu.printMenu("Not Available");
                     Integer choice = genderMenu.getChoice();
 
                     switch(choice){
@@ -130,7 +129,7 @@ public class StudentList extends ArrayList<Student> {
 
                     isNull = EssentialUtils.isEmptyString(gender);
                     if(isNull){
-                        System.out.println("Gender cannot be null! Try Again");
+                        System.out.println("You can not choose Otherwise! Try Again");
                     }
 
 
@@ -189,7 +188,7 @@ public class StudentList extends ArrayList<Student> {
     public void menuUpdateAndRemove(){
         
         boolean isContinue = false;
-        
+        sc = new Scanner(System.in);
        //Check if the list is empty 
        if(this.isEmpty()){
            System.out.println("The List Is Empty!");
@@ -214,7 +213,7 @@ public class StudentList extends ArrayList<Student> {
                     UDmenu.addItems("Delete");
 
 
-                    UDmenu.printMenu();
+                    UDmenu.printMenu("Exit");
                     choice = UDmenu.getChoice();
                     switch(choice){
                         case 1:
@@ -234,7 +233,7 @@ public class StudentList extends ArrayList<Student> {
     
     //Delete a Student based Position
     private void deleteStudent(Integer posID){
-        
+        sc = new Scanner(System.in);
         boolean confirm = false;
         
         
@@ -262,7 +261,7 @@ public class StudentList extends ArrayList<Student> {
     //Update Student
     private void updateStudent(Integer posID){
         
-        
+        sc = new Scanner(System.in);
         Menu updateMenu = new Menu("Student Update Menu");
         updateMenu.add("Change First Name");
         updateMenu.add("Change Last Name");
@@ -289,7 +288,7 @@ public class StudentList extends ArrayList<Student> {
         
         
         do{
-            updateMenu.printMenu();
+            updateMenu.printMenu("Exit");
             choice = updateMenu.getChoice();
             switch(choice){
 
@@ -303,7 +302,7 @@ public class StudentList extends ArrayList<Student> {
                     if(!isNull){
                        changeOccured++;
                        System.out.println("Update Succesful");
-                       this.get(posID).setFirstName(firstName);
+                       this.get(posID).setFirstName(EssentialUtils.capitalizeName(firstName));
                     }else{
                         System.out.println("Update Aborted!");
                     }
@@ -317,7 +316,7 @@ public class StudentList extends ArrayList<Student> {
                     if(!isNull){
                        changeOccured++;
                        System.out.println("Update Succesful");
-                       this.get(posID).setLastName(lastName);
+                       this.get(posID).setLastName(EssentialUtils.capitalizeName(lastName));
                     }else{
                         System.out.println("Update Aborted!");
                     }
@@ -381,7 +380,7 @@ public class StudentList extends ArrayList<Student> {
                     genderMenu.addItems("Others");
 
 
-                        genderMenu.printMenu();
+                        genderMenu.printMenu("No Update");
                         Integer genderChoice = genderMenu.getChoice();
 
                         switch(genderChoice){
@@ -447,11 +446,11 @@ public class StudentList extends ArrayList<Student> {
         }
     }
     
-    public void print(){
-        for(Student s : this){
-            System.out.println(s);
-        }
-    }
+//    public void print(){
+//        for(Student s : this){
+//            System.out.println(s);
+//        }
+//    }
     
  
     

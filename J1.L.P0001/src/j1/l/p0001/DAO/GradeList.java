@@ -9,7 +9,6 @@ import j1.l.p0001.DTO.Grade;
 import j1.l.p0001.Utils.EssentialUtils;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -42,6 +41,7 @@ public class GradeList extends ArrayList<Grade> {
     
     //Add new grade to the list
     public void addGrade(){
+       sc = new Scanner(System.in);
        String studentID;
        String subjectID;
         
@@ -69,7 +69,7 @@ public class GradeList extends ArrayList<Grade> {
        //A loop until user decided not to continue
         do{
             
-            //Loop until Student Name and Subject Name is inputted correctly
+            sc = new Scanner(System.in);
             do{
                 System.out.print("Enter Student ID  ");
                 studentID = sc.nextLine();
@@ -83,9 +83,9 @@ public class GradeList extends ArrayList<Grade> {
             
             do{
                 System.out.print("Enter Subject ID:  ");
-                subjectID = sc.nextLine();
+                subjectID = sc.nextLine().toUpperCase();
                 subjectPos = subList.getIdIndex(subjectID);
-                if(studentPos == -1){
+                if(subjectPos == -1){
                     System.out.println("ID does not exist! ");
                 }
             }while(subjectPos == -1);
@@ -183,6 +183,9 @@ public class GradeList extends ArrayList<Grade> {
                         System.out.println("Input mismatched!");
                     }
                     this.add(new Grade(studentID,subjectID,lab,progressTest,FE));
+                    stdList.get(stdList.getIdIndex(studentID)).canDelete = false;
+                    subList.get(subList.getIdIndex(subjectID)).canDelete = false;
+                    
             }
             
             isContinue = EssentialUtils.chooseYN("Do you want to continue? (Y/N): ");
@@ -196,13 +199,16 @@ public class GradeList extends ArrayList<Grade> {
     }
     
     public void printStudentReport(){
-        
+        sc = new Scanner(System.in);
         boolean isNull;
         
         Integer idIndex;
         
         String studentID;
-        
+        if(isEmpty()){
+            System.out.println("List is empty!");
+            return ;
+        }
         do{
                     System.out.print("Input Student ID:  ");
                     studentID = sc.nextLine();
@@ -216,6 +222,7 @@ public class GradeList extends ArrayList<Grade> {
                     }
         }while(idIndex == -1 || isNull);
         
+        //Sorting By Subject Name
         Collections.sort(this, (Grade t, Grade t1) -> {
             String subjectID1 = t.getSubjectID();
             String subjectID2 = t1.getSubjectID();
@@ -240,11 +247,17 @@ public class GradeList extends ArrayList<Grade> {
     }
     
     public void printSubjectReport(){
+        sc = new Scanner(System.in);
         boolean isNull;
         
         Integer idIndex;
         
         String subjectID;
+        
+        if(isEmpty()){
+            System.out.println("List is empty!");
+            return ;
+        }
         
         do{
                     System.out.print("Input Subject ID:  ");
@@ -259,6 +272,7 @@ public class GradeList extends ArrayList<Grade> {
                     }
         }while(idIndex == -1 || isNull);
         
+        //Sorting Student ID by name
         Collections.sort(this, (Grade t, Grade t1) -> {
             String studentID1 = t.getStudentID();
             String studentID2 = t1.getStudentID();

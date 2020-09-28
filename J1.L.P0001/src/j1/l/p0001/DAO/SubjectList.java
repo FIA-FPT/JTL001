@@ -44,8 +44,9 @@ public class SubjectList extends ArrayList<Subject> {
         boolean isCreditValid = true;
         boolean isContinue = true;
         
+        
         do{
-            
+            sc = new Scanner(System.in);
             //Inputting Subject ID
             do{
                 System.out.print("Input Subject ID:  ");
@@ -69,7 +70,7 @@ public class SubjectList extends ArrayList<Subject> {
                 isNull = EssentialUtils.isEmptyString(subjectName);
 
                 if(isNull){
-                    System.out.println("First name or Last name is empty! Try again!");
+                    System.out.println("Subject Name cannot be empty! Try again!");
                 }
 
             }while(isNull);
@@ -106,7 +107,7 @@ public class SubjectList extends ArrayList<Subject> {
     
     public void menuUpdateAndRemove(){
         
-        
+       sc = new Scanner(System.in);
        //Check if the list is empty 
        if(this.isEmpty()){
            System.out.println("The List Is Empty!");
@@ -118,7 +119,7 @@ public class SubjectList extends ArrayList<Subject> {
         Integer choice = 1;
         
         System.out.println("Input your ID here");
-        id = sc.nextLine();
+        id = sc.nextLine().toUpperCase();
         
         if((checkPos = getIdIndex(id)) == -1){
             System.out.println("Subject Code Does Not Exist!");
@@ -130,7 +131,7 @@ public class SubjectList extends ArrayList<Subject> {
                     UDmenu.addItems("Delete");
 
 
-                    UDmenu.printMenu();
+                    UDmenu.printMenu("Exit");
                     choice = UDmenu.getChoice();
                     switch(choice){
                         case 1:
@@ -151,11 +152,11 @@ public class SubjectList extends ArrayList<Subject> {
     
     //Delete a Student based Position
     private void deleteSubject(Integer posID){
-        
+        sc = new Scanner(System.in);
         boolean confirm = false;
         
         
-        confirm = EssentialUtils.chooseYN("Are you sure you want to delete this student? (Y/N):  ");
+        confirm = EssentialUtils.chooseYN("Are you sure you want to delete this subjects? (Y/N):  ");
         
         if(!confirm){
             
@@ -164,7 +165,7 @@ public class SubjectList extends ArrayList<Subject> {
         }else{
         
             if(!get(posID).canDelete){
-                System.out.println("Cannot delete this student!");
+                System.out.println("Cannot delete this Subject!");
             } else{
                 try{
                     
@@ -179,6 +180,7 @@ public class SubjectList extends ArrayList<Subject> {
     }
     private void updateSubject(Integer posID){
         //Initalize the Menu
+        sc = new Scanner(System.in);
         Menu updateMenu = new Menu("Subject Update Menu:");
         updateMenu.addItems("Update Subject Name");
         updateMenu.addItems("Update Credit Score");
@@ -199,7 +201,7 @@ public class SubjectList extends ArrayList<Subject> {
         //Using case switch to make decision
         
         while(choice > 0 && choice < 3){
-            updateMenu.printMenu();
+            updateMenu.printMenu("Exit");
             choice = updateMenu.getChoice();
             switch(choice){
                 case 1:

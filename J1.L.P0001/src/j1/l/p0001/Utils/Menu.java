@@ -29,7 +29,7 @@ public class Menu extends ArrayList<String> {
     }
     
     //Print the menu
-    public void printMenu(){
+    public void printMenu(String exitTerm){
         if(isEmpty()){
             System.out.println("Menu is Empty!");
         } else{
@@ -38,7 +38,7 @@ public class Menu extends ArrayList<String> {
             for(String item : this){
                 System.out.println(String.format("[%d] %s",++i,item));
             }
-            System.out.println("Others: Exit");
+            System.out.println("Others: " + exitTerm);
         }
     }
     

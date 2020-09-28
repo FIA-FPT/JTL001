@@ -40,7 +40,7 @@ public class J1LP0001 {
         
         
         do{
-            mainMenu.printMenu();
+            mainMenu.printMenu("Exit");
             choice = mainMenu.getChoice();
             switch(choice){
                 case 1:

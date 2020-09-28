@@ -36,7 +36,7 @@ public class EssentialUtils {
         return isValid;
     }
     
-    //Validate Date through date
+    //Validate Date through String
     public static boolean isDateValid(String date){
         SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
         dateFormat.setLenient(false);

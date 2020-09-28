@@ -24,6 +24,6 @@
 - [x] Code Subject and Subject List
 - [x] Code Grade and Grade List
 - [x] Testing and make sure all the functionality works correctly
-- [ ] Turn in the assignments
+- [x] Turn in the assignments
 
 
